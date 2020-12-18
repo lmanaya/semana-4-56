@@ -4,4 +4,6 @@
 ```
 npm install
 ```
-
+funcionan las pruebas
+```
+Aún no está conectado a heroku

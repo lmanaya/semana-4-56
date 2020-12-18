@@ -20,9 +20,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/api', router);
 
+app.get('/', function(req, res) {
+    console.log("Estructura base del proyecto semana 4 backend");
+    res.send("Estructura base del proyecto semana 4 backend");
+});
+
 app.set('port', process.env.PORT || 3000);
-
-
 
 if (process.env.NODE_ENV !== 'test') {
     app.listen(app.get('port'), () => {

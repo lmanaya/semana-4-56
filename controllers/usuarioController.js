@@ -10,7 +10,7 @@ const tokenServices = require('../services/token.js');
 //Métodos
 exports.list = async (req, res, next) => {
     try {
-        const user = await models.user.findAll();
+        const user = await models.Usuario.findAll();
         if (user) {
             res.status(200).json(user);
         }
@@ -30,7 +30,7 @@ exports.list = async (req, res, next) => {
 exports.login = async (req, res, next) => {
     try {
         // Verificar que el usuario exista
-        const user = await models.user.findOne({ where: { email: req.body.email } });
+        const user = await models.Usuario.findOne({ where: { email: req.body.email } });
         if (user) {
             // Verificar que la contraseña sea correcta
             const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
@@ -71,7 +71,7 @@ exports.login = async (req, res, next) => {
 }
 exports.register = async (req, res, next) => {
     try {
-        const user = await models.user.findOne({ where: { email: req.body.email } });
+        const user = await models.Usuario.findOne({ where: { email: req.body.email } });
         if (user) {
             res.status(409).send({
                 message: 'Sorry your request has a conflict with our system state, maybe the email is already'
@@ -79,7 +79,7 @@ exports.register = async (req, res, next) => {
         }
         else {
             req.body.password = bcrypt.hashSync(req.body.password, 10);
-            const user = await models.user.create(req.body);
+            const user = await models.Usuario.create(req.body);
             res.status(200).json(user);
         }
     }
@@ -92,9 +92,9 @@ exports.register = async (req, res, next) => {
 }
 exports.update = async (req, res, next) => {
     try {
-        const user = await models.user.findOne({ where: { email: req.body.email } });
+        const user = await models.Usuario.findOne({ where: { email: req.body.email } });
         if (user) {
-            const user = await models.user.update({ name: req.body.name, rol: req.body.rol },
+            const user = await models.Usuario.update({ name: req.body.name, rol: req.body.rol },
                 {
                     where: {
                         email: req.body.email

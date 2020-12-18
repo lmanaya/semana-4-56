@@ -36,7 +36,6 @@ module.exports = {
         }
     },
     verificarVendedor: async (req, res, next) => {
-        console.log(req.headers.token);
         if (!req.headers.token) {
             return res.status(404).send({
                 message: 'There is not token'

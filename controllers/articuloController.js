@@ -8,7 +8,12 @@ const bcrypt = require('bcryptjs');
 //Métodos
 exports.list = async (req, res, next) => {
     try {
-        const articulos = await models.Articulo.findAll();
+        const articulos = await models.Articulo.findAll({
+            include: [{
+                model: Categoria,
+                as: 'categoria'
+            }],
+        });
         if (articulos) {
             res.status(200).json(articulos);
         }
